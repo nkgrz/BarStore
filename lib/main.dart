@@ -1,4 +1,5 @@
 import 'package:bar_store/models/Product.dart';
+import 'package:bar_store/models/maps.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -6,7 +7,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +23,40 @@ class MyApp extends StatelessWidget {
 }
 
 class DrinksPage extends StatelessWidget {
-  final List<Product> drinks = ProductDataProvider().items;
+  final List<Product> drinks = ProductDataProvider().items.where((product) => product.isFavorite).toList();
+  final List<Product> allDrinks = ProductDataProvider().items;
 
-  DrinksPage({super.key});
+
+  DrinksPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Освежающие напитки'),
+        title: Row(
+          children: [
+            IconButton(
+              icon: Icon(Icons.map), // Иконка для карты
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        RestaurantMap(), // Страница с картой ресторанов
+                  ),
+                );
+              },
+            ),
+            const Text('Освежающие напитки'),
+            const Spacer(),
+            IconButton(
+              icon: const Icon(Icons.shopping_cart), // Иконка для корзины
+              onPressed: () {
+                // Обработка нажатия на корзину
+              },
+            ),
+          ],
+        ),
       ),
       body: Column(
         children: [
@@ -53,14 +79,14 @@ class DrinksPage extends StatelessWidget {
           const SizedBox(height: 15),
           Expanded(
             child: ListView.builder(
-              itemCount: drinks.length,
+              itemCount: allDrinks.length,
               itemBuilder: (context, index) => ListTile(
-                title: Text(drinks[index].title),
-                subtitle: Text('${drinks[index].price} \$.'),
+                title: Text(allDrinks[index].title),
+                subtitle: Text('${allDrinks[index].price} \$.'),
                 leading: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.network(
-                    drinks[index].imgUrl,
+                    allDrinks[index].imgUrl,
                     width: 100,
                     height: 100,
                     fit: BoxFit.cover,
@@ -72,13 +98,13 @@ class DrinksPage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) =>
-                          DrinkDetailPage(drink: drinks[index]),
+                          DrinkDetailPage(drink: allDrinks[index]),
                     ),
                   );
                 },
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -125,7 +151,11 @@ class DrinkCard extends StatelessWidget {
               const SizedBox(height: 5),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(drink.title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),),
+                child: Text(
+                  drink.title,
+                  style: const TextStyle(
+                      fontSize: 15, fontWeight: FontWeight.w500),
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
