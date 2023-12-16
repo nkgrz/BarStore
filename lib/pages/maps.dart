@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class RestaurantMap extends StatelessWidget {
+  const RestaurantMap({super.key});
+
   @override
   Widget build(BuildContext context) {
     // Создайте контроллер карты
@@ -17,14 +19,14 @@ class RestaurantMap extends StatelessWidget {
     ];
 
     // Создайте начальные координаты для отображения карты
-    final CameraPosition initialCameraPosition = CameraPosition(
+    const CameraPosition initialCameraPosition = CameraPosition(
       target: LatLng(51.5074, -0.1278), // Начальные координаты (Лондон, Великобритания)
       zoom: 10.0, // Уровень масштабирования карты
     );
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Карта ресторанов'),
+        title: const Text('Карта ресторанов'),
       ),
       body: GoogleMap(
         mapType: MapType.normal,

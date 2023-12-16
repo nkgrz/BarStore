@@ -1,5 +1,5 @@
 import 'package:bar_store/models/Product.dart';
-import 'package:bar_store/models/maps.dart';
+import 'package:bar_store/pages/maps.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,7 +7,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,40 +23,39 @@ class MyApp extends StatelessWidget {
 }
 
 class DrinksPage extends StatelessWidget {
-  final List<Product> drinks = ProductDataProvider().items.where((product) => product.isFavorite).toList();
+  final List<Product> drinks = ProductDataProvider()
+      .items
+      .where((product) => product.isFavorite)
+      .toList();
   final List<Product> allDrinks = ProductDataProvider().items;
 
-
-  DrinksPage({Key? key}) : super(key: key);
+  DrinksPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          children: [
-            IconButton(
-              icon: Icon(Icons.map), // Иконка для карты
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        RestaurantMap(), // Страница с картой ресторанов
-                  ),
-                );
-              },
-            ),
-            const Text('Освежающие напитки'),
-            const Spacer(),
-            IconButton(
-              icon: const Icon(Icons.shopping_cart), // Иконка для корзины
-              onPressed: () {
-                // Обработка нажатия на корзину
-              },
-            ),
-          ],
+        leading: IconButton(
+          icon: const Icon(Icons.map), // Иконка для карты
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    RestaurantMap(), // Страница с картой ресторанов
+              ),
+            );
+          },
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.shopping_cart), // Иконка для корзины
+            onPressed: () {
+              // Обработка нажатия на корзину
+            },
+          ),
+        ],
+        title: const Text('Освежающие напитки'),
       ),
       body: Column(
         children: [
@@ -114,7 +113,7 @@ class DrinksPage extends StatelessWidget {
 class DrinkCard extends StatelessWidget {
   final Product drink;
 
-  const DrinkCard({Key? key, required this.drink}) : super(key: key);
+  const DrinkCard({super.key, required this.drink});
 
   @override
   Widget build(BuildContext context) {
@@ -174,7 +173,7 @@ class DrinkCard extends StatelessWidget {
 class DrinkDetailPage extends StatelessWidget {
   final Product drink;
 
-  const DrinkDetailPage({Key? key, required this.drink}) : super(key: key);
+  const DrinkDetailPage({super.key, required this.drink});
 
   @override
   Widget build(BuildContext context) {
@@ -203,7 +202,6 @@ class DrinkDetailPage extends StatelessWidget {
             padding: const EdgeInsets.all(15.0),
             child: Text(drink.description),
           ),
-          // Добавьте здесь дополнительные детали и кнопки
         ],
       ),
     );
@@ -224,7 +222,7 @@ class AddToCardBatton extends StatelessWidget {
           shape: const CircleBorder(), // Форма круга для кнопки
         ),
         child: const Icon(
-          Icons.add,
+          Icons.add_circle,
           size: 25,
           color: Colors.white,
         ));
