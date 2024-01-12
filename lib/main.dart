@@ -1,7 +1,11 @@
 import 'package:bar_store/pages/drink_page.dart';
+import 'package:bar_store/utilities/load_favorite.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized(); // Инициализация Flutter-биндинга
+  await loadFavorites();
+  await loadFavorites();
   runApp(const MyApp());
 }
 
@@ -20,4 +24,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

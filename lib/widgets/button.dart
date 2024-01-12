@@ -1,3 +1,4 @@
+import 'package:bar_store/utilities/load_favorite.dart';
 import 'package:bar_store/widgets/favorite.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,7 @@ class AddToFavoriteBattonState extends State<AddToFavoriteBatton> {
             favourites.add(widget.regionId);
           }
           isFavorite = !isFavorite;
-          // saveFavouritesItems();
+          saveFavourites();
         });
       },
       style: ElevatedButton.styleFrom(

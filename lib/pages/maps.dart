@@ -20,7 +20,8 @@ class RestaurantMap extends StatelessWidget {
 
     // Создайте начальные координаты для отображения карты
     const CameraPosition initialCameraPosition = CameraPosition(
-      target: LatLng(51.5074, -0.1278), // Начальные координаты (Лондон, Великобритания)
+      target: LatLng(
+          51.5074, -0.1278), // Начальные координаты (Лондон, Великобритания)
       zoom: 10.0, // Уровень масштабирования карты
     );
 
@@ -56,4 +57,3 @@ class Restaurant {
 
   Restaurant({required this.name, required this.lat, required this.lng});
 }
-
