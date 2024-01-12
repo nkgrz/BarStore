@@ -1,4 +1,3 @@
-
 import 'package:bar_store/models/product.dart';
 import 'package:bar_store/pages/drink_detail_page.dart';
 import 'package:bar_store/widgets/button.dart';
@@ -55,7 +54,7 @@ class DrinkCard extends StatelessWidget {
                 children: [
                   Text('${drink.price} \$',
                       style: const TextStyle(fontSize: 18)),
-                  const AddToCardBatton(),
+                  AddToFavoriteBatton(regionId: drink.id),
                 ],
               )
             ],

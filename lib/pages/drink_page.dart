@@ -1,9 +1,13 @@
-
 import 'package:bar_store/models/product.dart';
 import 'package:bar_store/pages/drink_detail_page.dart';
+import 'package:bar_store/pages/favourites_screen.dart';
+import 'package:bar_store/pages/maps.dart';
 import 'package:bar_store/utilities/load_products.dart';
 import 'package:bar_store/widgets/drink_card.dart';
 import 'package:flutter/material.dart';
+
+List<Product> drinks = []; // Топовые напитки
+List<Product> allDrinks = []; // Все напитки
 
 class DrinksPage extends StatefulWidget {
   const DrinksPage({super.key});
@@ -13,9 +17,6 @@ class DrinksPage extends StatefulWidget {
 }
 
 class DrinksPageState extends State<DrinksPage> {
-  List<Product> drinks = []; // Топовые напитки
-  List<Product> allDrinks = []; // Все напитки
-
   @override
   void initState() {
     super.initState();
@@ -34,20 +35,26 @@ class DrinksPageState extends State<DrinksPage> {
         leading: IconButton(
           icon: const Icon(Icons.map), // Иконка для карты
           onPressed: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) =>
-            //         RestaurantMap(), // Страница с картой ресторанов
-            //   ),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) =>
+                    const RestaurantMap(), // Страница с картой ресторанов
+              ),
+            );
           },
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.shopping_cart), // Иконка для корзины
+            icon: const Icon(Icons.favorite), // Иконка для корзины
             onPressed: () {
               // Обработка нажатия на корзину
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const FavouritesScreen(),
+                ),
+              );
             },
           ),
         ],

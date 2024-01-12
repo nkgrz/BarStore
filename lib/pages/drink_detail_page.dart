@@ -26,7 +26,7 @@ class DrinkDetailPage extends StatelessWidget {
                 style:
                     const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
               ),
-              const AddToCardBatton(),
+              AddToFavoriteBatton(regionId: drink.id),
             ],
           ),
 
